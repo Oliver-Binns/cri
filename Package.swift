@@ -10,7 +10,7 @@ let package = Package(
         // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
         // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
-        .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+        .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0")
     ],
     targets: [
         .executableTarget(
@@ -18,7 +18,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOPosix", package: "swift-nio"),
+                .product(name: "NIOPosix", package: "swift-nio")
             ],
             swiftSettings: swiftSettings
         ),
@@ -26,7 +26,7 @@ let package = Package(
             name: "IssuerTests",
             dependencies: [
                 .target(name: "Issuer"),
-                .product(name: "XCTVapor", package: "vapor"),
+                .product(name: "XCTVapor", package: "vapor")
             ],
             swiftSettings: swiftSettings
         ),
@@ -37,5 +37,5 @@ let package = Package(
 
 var swiftSettings: [SwiftSetting] { [
     .enableUpcomingFeature("DisableOutwardActorInference"),
-    .enableExperimentalFeature("StrictConcurrency"),
+    .enableExperimentalFeature("StrictConcurrency")
 ] }
