@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "cri",
+    name: "CredentialIssuer",
     platforms: [
        .macOS(.v13)
     ],
@@ -14,7 +14,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "App",
+            name: "Issuer",
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "NIOCore", package: "swift-nio"),
@@ -23,13 +23,15 @@ let package = Package(
             swiftSettings: swiftSettings
         ),
         .testTarget(
-            name: "AppTests",
+            name: "IssuerTests",
             dependencies: [
-                .target(name: "App"),
+                .target(name: "Issuer"),
                 .product(name: "XCTVapor", package: "vapor"),
             ],
             swiftSettings: swiftSettings
-        )
+        ),
+
+        .target(name: "Authorization")
     ]
 )
 

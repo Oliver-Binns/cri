@@ -1,4 +1,4 @@
-@testable import App
+@testable import Issuer
 import XCTVapor
 
 final class AppTests: XCTestCase {
@@ -14,10 +14,9 @@ final class AppTests: XCTestCase {
         self.app = nil
     }
     
-    func testHelloWorld() async throws {
-        try await self.app.test(.GET, "hello", afterResponse: { res async in
+    func testWellKnown() async throws {
+        try await self.app.test(.GET, ".well-known/openid-credential-issuer", afterResponse: { res async in
             XCTAssertEqual(res.status, .ok)
-            XCTAssertEqual(res.body.string, "Hello, world!")
         })
     }
 }
