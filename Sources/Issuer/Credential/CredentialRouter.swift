@@ -18,7 +18,7 @@ struct CredentialRouter: RouteCollection {
     @Sendable
     func credentials(_ request: Request) throws -> CredentialResponse {
         let credential = try request.content.decode(CredentialRequest.self)
-        
+
         return CredentialResponse()
     }
 }
