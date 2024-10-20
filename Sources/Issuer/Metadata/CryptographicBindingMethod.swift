@@ -1,5 +1,5 @@
 import Foundation
 
-enum CryptographicBindingMethod: String, Codable {
+enum CryptographicBindingMethod: String, Encodable {
     case jwk
 }

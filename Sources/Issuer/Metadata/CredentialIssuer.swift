@@ -1,6 +1,6 @@
 import Vapor
 
-struct CredentialIssuer: Content {
+struct CredentialIssuer: Encodable {
     let supportedConfigurations: [String: CredentialConfiguration]
 
     enum CodingKeys: String, CodingKey {

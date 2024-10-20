@@ -2,7 +2,7 @@
 import XCTVapor
 
 final class AppTests: XCTestCase {
-    var app: Application!
+    private var app: Application!
 
     override func setUp() async throws {
         self.app = try await Application.make(.testing)
@@ -15,8 +15,15 @@ final class AppTests: XCTestCase {
     }
 
     func testWellKnown() async throws {
-        try await self.app.test(.GET, ".well-known/openid-credential-issuer", afterResponse: { res async in
+        let expectedData = try JSONEncoder().encode(
+            CredentialIssuer(supportedConfigurations: ["library_card": .libraryCard])
+        )
+
+        try await self.app.test(.GET, ".well-known/openid-credential-issuer",
+                                afterResponse: { res async throws in
+
             XCTAssertEqual(res.status, .ok)
+            try XCTAssertEqualJSONData(Data(buffer: res.body), expectedData)
         })
     }
 }
