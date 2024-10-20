@@ -11,6 +11,20 @@ struct CredentialConfigurationTests {
         let data = try encoder.encode(CredentialConfiguration.libraryCard)
         #expect(String(data: data, encoding: .utf8) == """
         {
+          "claims" : {
+            "family_name" : {
+
+            },
+            "given_name" : {
+
+            },
+            "is_over_18" : {
+
+            },
+            "is_over_65" : {
+
+            }
+          },
           "credential_signing_alg_values_supported" : [
             "ES256"
           ],
@@ -18,7 +32,15 @@ struct CredentialConfigurationTests {
             "jwk"
           ],
           "format" : "vc+sd-jwt",
-          "scope" : "library.catalogue.read"
+          "proof_types_supported" : {
+            "jwt" : {
+              "proof_signing_alg_values_supported" : [
+                "ES256"
+              ]
+            }
+          },
+          "scope" : "library.catalogue.read",
+          "vct" : "vc+sd-jwt-library-card-sample-implementation",
         }
         """)
     }
