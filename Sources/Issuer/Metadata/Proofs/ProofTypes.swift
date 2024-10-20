@@ -9,8 +9,8 @@ struct ProofTypes: Encodable {
     let proofTypes: [ProofType]
 
     var keys: [CodingKey] {
-        proofTypes.enumerated().compactMap {
-            ProofTypeCodingKey(stringValue: $1.name)
+        proofTypes.compactMap {
+            ProofTypeCodingKey(stringValue: $0.name)
         }
     }
 

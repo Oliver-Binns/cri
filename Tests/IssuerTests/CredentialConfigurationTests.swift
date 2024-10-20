@@ -40,7 +40,7 @@ struct CredentialConfigurationTests {
             }
           },
           "scope" : "library.catalogue.read",
-          "vct" : "vc+sd-jwt-library-card-sample-implementation",
+          "vct" : "vc+sd-jwt-library-card-sample-implementation"
         }
         """)
     }

@@ -9,8 +9,8 @@ struct Claims: Encodable {
     let claims: [any Claim]
 
     var keys: [CodingKey] {
-        claims.enumerated().compactMap {
-            ClaimCodingKey(stringValue: $1.name)
+        claims.compactMap {
+            ClaimCodingKey(stringValue: $0.name)
         }
     }
 
