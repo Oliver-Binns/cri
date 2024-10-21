@@ -28,10 +28,10 @@ extension CredentialConfiguration {
             format: "vc+sd-jwt",
             scope: "library.catalogue.read",
             claims: [
-                FirstNameClaim(),
-                FamilyNameClaim(),
-                AgeClaim(age: 18),
-                AgeClaim(age: 65)
+                .firstName,
+                .familyName,
+                .ageEighteen,
+                .ageSixtyFive
             ],
             supportedCryptographicBindingMethods: [.jwk],
             supportedSigningAlgorithms: [.es256],
