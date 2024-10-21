@@ -1,5 +1,6 @@
 import Vapor
 
-struct CredentialRequest: Content {
+struct CredentialRequest: Decodable {
+    let format: CredentialFormat
     let proof: Proof
 }

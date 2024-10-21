@@ -1,5 +1,5 @@
 import Vapor
 
-struct CredentialResponse: Content {
-
+struct CredentialResponse: Encodable {
+    let credential: String
 }
