@@ -1,9 +1,10 @@
+import JWT
 import Vapor
 
 // configures your application
 public func configure(_ app: Application) async throws {
-    // uncomment to serve files from /Public folder
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    // TODO: this key value should be passed in as an environment variable
+    await app.jwt.keys.add(hmac: "secret", digestAlgorithm: .sha256)
     // register routes
     try routes(app)
 }

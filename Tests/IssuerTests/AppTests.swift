@@ -19,11 +19,39 @@ final class AppTests: XCTestCase {
             CredentialIssuer(supportedConfigurations: ["library_card": .libraryCard])
         )
 
-        try await self.app.test(.GET, ".well-known/openid-credential-issuer",
-                                afterResponse: { res async throws in
+        try await self.app.test(
+            .GET, ".well-known/openid-credential-issuer",
+            afterResponse: { res async throws in
+                XCTAssertEqual(res.status, .ok)
+                try XCTAssertEqualJSONData(Data(buffer: res.body), expectedData)
+            }
+        )
+    }
 
-            XCTAssertEqual(res.status, .ok)
-            try XCTAssertEqualJSONData(Data(buffer: res.body), expectedData)
-        })
+    func testRequestCredential() async throws {
+        let requestData = try XCTUnwrap("""
+        {
+          "format": "jwt_vc_json",
+          "proof": {
+            "proof_type": "jwt",
+            "jwt": ""
+          }
+        }
+        """.data(using: .utf8))
+
+        try await self.app.test(
+            .POST, "credential",
+            headers: ["Content-Type": "application/json"],
+            body: ByteBuffer(data: requestData),
+            afterResponse: { res async throws in
+                XCTAssertEqual(res.status, .ok)
+
+                let response = try res.content.decode([String: String].self)
+                XCTAssertEqual(response.keys.count, 1)
+
+                let credential = try XCTUnwrap(response["credential"])
+                // TODO: test JWT validity
+            }
+        )
     }
 }
